@@ -7,7 +7,7 @@ from typing import List
 @lru_cache(maxsize=1)
 def get_model() -> SentenceTransformer:
     """Load the embedding model once and cache it (thread-safe via lru_cache)."""
-    print("🔄 Loading embedding model...")
+    print("Loading embedding model...")
     return SentenceTransformer("all-MiniLM-L6-v2")
 
 

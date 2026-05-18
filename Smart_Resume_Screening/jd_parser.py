@@ -63,7 +63,7 @@ def parse_jd(jd_text: str) -> dict:
 
     try:
         response = client.models.generate_content(
-            model="gemini-2.5-flash-lite",
+            model="gemini-2.0-flash",
             contents=prompt,
             config={"temperature": 0, "top_p": 0.1},
         )

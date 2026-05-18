@@ -1,0 +1,16 @@
+{
+  "model_name": "RandomForestClassifier",
+  "training_date_utc": "2026-05-07T10:16:42.388123+00:00",
+  "features": [
+    "attendance",
+    "task_completion_rate",
+    "peer_reviews",
+    "project_success_rate"
+  ],
+  "dataset_rows": 3000,
+  "metrics": {
+    "performance_accuracy": 0.8167,
+    "promotion_accuracy": 0.6483,
+    "skill_gap_accuracy": 0.5533
+  }
+}

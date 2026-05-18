@@ -16,13 +16,13 @@ from matcher import match_resume_to_jd, get_cached_jd
 # CONFIG  — edit these for your use-case
 # ──────────────────────────────────────────────────────────────────────────────
 
-JD_PATH = r"C:\Users\hp\Desktop\HRM\AI_Powered_HRM\Smart_Resume_Screening\resumes\Job Title.pdf"
+JD_PATH = r"C:\Users\Lenovo\Desktop\hrms\Smart_Resume_Screening\resumes\Job Title.pdf"
 
 # Folder containing candidate PDFs  (or pass a list of paths to main())
-RESUME_FOLDER = r"AI_Powered_CRM\backend\services\Smart_Resume_Screening\resumesjjd"
+RESUME_FOLDER = r"C:\Users\Lenovo\Desktop\hrms\Smart_Resume_Screening\resumes"
 
 # Fallback single-resume path (used when RESUME_FOLDER doesn't exist / is empty)
-SINGLE_RESUME_PATH = r"C:\Users\hp\Desktop\HRM\AI_Powered_HRM\Smart_Resume_Screening\resumes\Gaohar Imran Resume.pdf"
+SINGLE_RESUME_PATH = r"C:\Users\Lenovo\Desktop\hrms\Smart_Resume_Screening\resumes\Gaohar Imran Resume.pdf"
 
 # How many resumes to process in parallel.
 # Gemini free-tier allows ~15 req/min → keep this ≤ 15 to avoid 429s.
@@ -62,7 +62,7 @@ def process_jd(jd_path: str) -> dict:
     print("Parsing JD with Gemini...")
     jd = parse_jd(jd_text)
 
-    print("⚡ Embedding JD fields (once)...")
+    print("Embedding JD fields (once)...")
     jd_cached = get_cached_jd(jd_id, jd)
 
     print("JD ready.\n")
@@ -133,15 +133,15 @@ def process_resumes_parallel(
             result = future.result()
             results.append(result)
 
-            status_icon = "✅" if result["status"] == "ok" else "❌"
+            status_icon = "[OK]" if result["status"] == "ok" else "[ERR]"
             print(
                 f"  {status_icon} [{i}/{total}] {result['resume']} "
-                f"— score: {result.get('score', 'N/A')} "
+                f"- score: {result.get('score', 'N/A')} "
                 f"({result.get('verdict', '')})"
             )
 
     elapsed = time.perf_counter() - t0
-    print(f"\n⏱  Finished {total} resume(s) in {elapsed:.1f}s "
+    print(f"\nFinished {total} resume(s) in {elapsed:.1f}s "
           f"({elapsed/total:.2f}s per resume)\n")
 
     # Sort by score descending; errors go to the bottom
